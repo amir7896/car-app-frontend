@@ -21,6 +21,7 @@ const Navbar = (props) => {
 
   const handleLogout = () => {
     signout();
+    toggleSidebar();
     navigate("/login");
     toast.success("Logout successfully");
   };

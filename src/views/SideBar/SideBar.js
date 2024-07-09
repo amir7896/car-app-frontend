@@ -1,27 +1,22 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Layout, Menu, theme } from "antd";
 import { CarOutlined } from "@ant-design/icons";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 
 const { Sider } = Layout;
 
 const Sidebar = (props) => {
   const { open, setOpen, isSmallScreen } = props;
   const navigate = useNavigate();
+  const location = useLocation();
   const {
     token: { colorBgContainer },
   } = theme.useToken();
 
-  const menuItems = [{ label: "Cars", key: "Cars", icon: <CarOutlined /> }];
+  const menuItems = [{ label: "Cars", key: "/", icon: <CarOutlined /> }];
 
   const handleMenuClick = (key) => {
-    switch (key) {
-      case "Cars":
-        navigate("/");
-        break;
-      default:
-        break;
-    }
+    navigate(key);
   };
 
   const handleListItemClick = () => {
@@ -44,8 +39,7 @@ const Sidebar = (props) => {
       <Menu
         theme="dark"
         mode="inline"
-        defaultSelectedKeys={["1"]}
-        defaultOpenKeys={["sub1"]}
+        selectedKeys={[location.pathname]}
         style={{
           height: "100%",
           borderRight: 0,
